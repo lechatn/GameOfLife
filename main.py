@@ -22,11 +22,9 @@ def empty_grid(size) :
 
     return grid
 
-def print_grid(grid) :
-    for i in range(len(grid)) :
-        for j in range(len(grid[i])) :
-            print(grid[i][j], end = " ")
-        print()           
+def print_grid(grid):
+    for row in grid:
+        print(" ".join('⬜' if cell == 1 else '⬛' for cell in row))        
 
 
 def stage(grille) :
@@ -62,9 +60,12 @@ def stage(grille) :
 
 def jouer():
     grille = initial_grid(int(input("Entrez la taille de la grille : ")))
+    i=0
     while True:
+        i+=1
         print_grid(grille)
         input("Appuyez sur Enter pour passer au tour suivant...")  # Attendre que l'utilisateur appuie sur Entrée
+        print("Tour", i)
         grille = stage(grille)  # Calculer la prochaine génération
 
 jouer()
