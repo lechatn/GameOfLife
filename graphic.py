@@ -42,17 +42,15 @@ def stage(grille):
 class JeuDeLaVie:
     def __init__(self, root):
         self.root = root
-        self.taille = self.demander_taille_grille()  # Demander la taille de la grille au démarrage
+        self.taille = self.demander_taille_grille() 
         self.grille = initial_grid(self.taille)
         self.cellules = []
         self.history = []
         self.cycle_detected = False
 
-        # Configurer la fenêtre
         self.root.title("Jeu de la Vie")
         self.root.geometry(f"{self.taille * 20}x{self.taille * 20 + 50}")
         
-        # Création du canevas pour afficher la grille
         self.canvas = tk.Canvas(self.root, width=self.taille * 20, height=self.taille * 20, bg="white")
         self.canvas.pack()
 
@@ -68,13 +66,13 @@ class JeuDeLaVie:
         self.load_button = tk.Button(self.controls, text="Charger", command=self.load_grid)
         self.load_button.pack(side=tk.LEFT)
 
-        self.auto_mode = False  # Mode automatique désactivé par défaut
+        self.auto_mode = False  
         self.draw_grid()
 
     def demander_taille_grille(self):
         """Demande à l'utilisateur la taille de la grille."""
         taille = simpledialog.askinteger("Taille de la grille", "Entrez la taille de la grille (min : 5, max : 45) :", minvalue=5, maxvalue=45)
-        return taille or 20  # Taille par défaut : 20 si l'utilisateur annule
+        return taille or 20  
 
     def draw_grid(self):
         """Dessine la grille sur le canevas."""
@@ -103,7 +101,7 @@ class JeuDeLaVie:
         self.draw_grid()
 
         if self.auto_mode:
-            self.root.after(200, self.next_turn)  # Continue automatiquement après 200 ms
+            self.root.after(200, self.next_turn) 
 
     def toggle_auto(self):
         """Active ou désactive le mode automatique."""
@@ -128,7 +126,6 @@ class JeuDeLaVie:
         else:
             print("Aucun fichier de sauvegarde trouvé.")
 
-# Lancer le jeu
 if __name__ == "__main__":
     root = tk.Tk()
     jeu = JeuDeLaVie(root)

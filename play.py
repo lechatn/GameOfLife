@@ -2,6 +2,7 @@ from grid import empty_grid, print_grid, initial_grid
 import os
 
 def stage(grille) :
+    '''permet de faire evoluer la grille'''
     HAUTEUR = len(grille)
     LARGEUR = HAUTEUR
     nouvelle_grille = empty_grid(len(grille))
@@ -19,30 +20,29 @@ def stage(grille) :
                 if 0 <= ny < HAUTEUR and 0 <= nx < LARGEUR:
                     voisins_vivants += grille[ny][nx]
 
-            # Appliquer les règles du jeu
-            if grille[y][x] == 1:  # Cellule vivante
-                if voisins_vivants == 2 or voisins_vivants == 3 :  # Meurt si elle n'a pas 2 voisins vivants
+            if grille[y][x] == 1: 
+                if voisins_vivants == 2 or voisins_vivants == 3 :  
                     nouvelle_grille[y][x] = 1
                 else:
-                    nouvelle_grille[y][x] = 0  # Reste vivante si elle a 2 voisins vivants
+                    nouvelle_grille[y][x] = 0  
             elif grille[y][x] == 0 and voisins_vivants == 3:
-                nouvelle_grille[y][x] = 1  # Cellule morte devient vivante si elle a 3 voisins vivants
+                nouvelle_grille[y][x] = 1  
 
     return nouvelle_grille
 
 def jouer():
-    # Check if a saved grid exists
+    '''Fonction principale pour jouer au jeu de la vie '''
     if os.path.exists("grille.txt"):
         choice = input("Voulez-vous (n)ouvelle grille ou (r)écupérer la grille sauvegardée? (n/r): ")
         if choice.lower() == 'r':
-            with open("grille.txt", "r") as file:  # Load the saved grid
+            with open("grille.txt", "r") as file:  
                 grille = [list(map(int, line.split())) for line in file]
         else:
             grille = initial_grid(int(input("Entrez la taille de la grille : ")))
     else:
         grille = initial_grid(int(input("Entrez la taille de la grille : ")))
 
-    history = []  # To store previous grid states
+    history = []  
     i = 0
     while True:
         i += 1
@@ -54,7 +54,7 @@ def jouer():
             cycle_length = i - cycle_start
             print(f"Cycle detected! Starts at generation {cycle_start}, length {cycle_length}.")
         
-        history.append(grille)  # Store the current grid state
+        history.append(grille) 
         
         with open("grille.txt", "w") as file:
             for row in grille:
@@ -62,9 +62,9 @@ def jouer():
         
         # Prompt for user input to continue or quit
         user_input = input("Appuyez sur Enter pour passer au tour suivant ou 'q' pour quitter: ")
-        if user_input.lower() == 'q':  # Check if the user wants to quit
+        if user_input.lower() == 'q':  
             print("Merci d'avoir joué!")
-            break  # Exit the loop and end the game
+            break  
 
         print("Tour", i)
-        grille = stage(grille)  # Calculer la prochaine génération
+        grille = stage(grille) 
