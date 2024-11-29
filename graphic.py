@@ -2,39 +2,8 @@ import tkinter as tk
 from tkinter import simpledialog
 import random
 import os
-
-def initial_grid(size):
-    return [[random.randint(0, 1) for _ in range(size)] for _ in range(size)]
-
-def empty_grid(size):
-    return [[0 for _ in range(size)] for _ in range(size)]
-
-def stage(grille):
-    HAUTEUR = len(grille)
-    LARGEUR = HAUTEUR
-    nouvelle_grille = empty_grid(len(grille))
-    for y in range(HAUTEUR):
-        for x in range(LARGEUR):
-            voisins = [
-                (-1, -1), (-1, 0), (-1, 1),
-                (0, -1),           (0, 1),
-                (1, -1), (1, 0), (1, 1)
-            ]
-            voisins_vivants = 0
-
-            for dy, dx in voisins:
-                ny, nx = y + dy, x + dx
-                if 0 <= ny < HAUTEUR and 0 <= nx < LARGEUR:
-                    voisins_vivants += grille[ny][nx]
-
-            if grille[y][x] == 1:  # Cellule vivante
-                if voisins_vivants == 2 or voisins_vivants == 3:
-                    nouvelle_grille[y][x] = 1
-                else:
-                    nouvelle_grille[y][x] = 0
-            elif grille[y][x] == 0 and voisins_vivants == 3:
-                nouvelle_grille[y][x] = 1
-    return nouvelle_grille
+from grid import empty_grid, initial_grid
+from play import stage
 
 class JeuDeLaVie:
     def __init__(self, root):
