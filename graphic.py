@@ -55,7 +55,7 @@ class JeuDeLaVie:
         self.controls.pack()
         self.next_button = tk.Button(self.controls, text="Tour Suivant", command=self.next_turn)
         self.next_button.pack(side=tk.LEFT)
-        self.auto_button = tk.Button(self.controls, text="Auto (Toggle)", command=self.toggle_auto)
+        self.auto_button = tk.Button(self.controls, text="Auto", command=self.toggle_auto)
         self.auto_button.pack(side=tk.LEFT)
         self.save_button = tk.Button(self.controls, text="Sauvegarder", command=self.save_grid)
         self.save_button.pack(side=tk.LEFT)

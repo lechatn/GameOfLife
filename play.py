@@ -1,4 +1,4 @@
-from grid import empty_grid, print_grid, initial_grid
+from grid import empty_grid, print_grid, initial_grid, ask_length
 import os
 
 def stage(grille) :
@@ -38,9 +38,9 @@ def jouer():
             with open("grille.txt", "r") as file:  
                 grille = [list(map(int, line.split())) for line in file]
         else:
-            grille = initial_grid(int(input("Entrez la taille de la grille : ")))
+            grille = initial_grid(ask_length())
     else:
-        grille = initial_grid(int(input("Entrez la taille de la grille : ")))
+        grille = initial_grid(ask_length())
 
     history = []  
     i = 0
@@ -52,7 +52,7 @@ def jouer():
         if grille in history:
             cycle_start = history.index(grille)
             cycle_length = i - cycle_start
-            print(f"Cycle detected! Starts at generation {cycle_start}, length {cycle_length}.")
+            print(f"Cycle detecté! Débute à la génération {cycle_start}, longueur {cycle_length}.")
         
         history.append(grille) 
         
