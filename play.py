@@ -33,8 +33,8 @@ def stage(grille) :
 def jouer():
     '''Fonction principale pour jouer au jeu de la vie '''
     if os.path.exists("grille.txt"):
-        choice = input("Voulez-vous (n)ouvelle grille ou (r)écupérer la grille sauvegardée? (n/r): ")
-        if choice.lower() == 'r':
+        choix = input("Voulez-vous (n)ouvelle grille ou (r)écupérer la grille sauvegardée? (n/r): ")
+        if choix.lower() == 'r':
             with open("grille.txt", "r") as file:  
                 grille = [list(map(int, line.split())) for line in file]
         else:
@@ -42,23 +42,23 @@ def jouer():
     else:
         grille = initial_grid(ask_length())
 
-    history = []  
+    derniere = []  
     i = 0
     while True:
         i += 1
         print_grid(grille)
         
         # Check for cycles
-        if grille in history:
-            cycle_start = history.index(grille)
-            cycle_length = i - cycle_start
-            print(f"Cycle detecté! Débute à la génération {cycle_start}, longueur {cycle_length}.")
+        if grille in derniere:
+            debut_cycle = derniere.index(grille)
+            longueur_cyvle = i - debut_cycle
+            print(f"Cycle detecté! Débute à la génération {debut_cycle}, longueur {longueur_cyvle}.")
         
-        history.append(grille) 
+        derniere.append(grille) 
         
         with open("grille.txt", "w") as file:
-            for row in grille:
-                file.write(" ".join(map(str, row)) + "\n")
+            for ligne in grille:
+                file.write(" ".join(map(str, ligne)) + "\n")
         
         # Prompt for user input to continue or quit
         user_input = input("Appuyez sur Enter pour passer au tour suivant ou 'q' pour quitter: ")

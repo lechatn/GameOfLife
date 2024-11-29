@@ -1,8 +1,7 @@
 import tkinter as tk
 from tkinter import simpledialog
-import random
 import os
-from grid import empty_grid, initial_grid
+from grid import initial_grid
 from play import stage
 
 class JeuDeLaVie:

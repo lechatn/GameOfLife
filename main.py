@@ -4,8 +4,8 @@ import tkinter as tk
 
 
 if __name__ == "__main__":
-    choice = input("Voulez-vous jouer en mode (g)raphique ou (c)onsole? (g/c): ")
-    if choice.lower() == 'g':
+    choix = input("Voulez-vous jouer en mode (g)raphique ou (c)onsole? (g/c): ")
+    if choix.lower() == 'g':
         root = tk.Tk()
         jeu = JeuDeLaVie(root)
         root.mainloop()
