@@ -30,12 +30,13 @@ def print_grid(grid):
     os.system('cls' if os.name == 'nt' else 'clear') 
     for row in grid:
         print(" ".join('⬜' if cell == 1 else '⬛' for cell in row))        
-
 def ask_length() :
     while True :
         try :
-            size = int(input("Entrez la taille de la grille : "))
-            return size
-        except ValueError :
+            size = int(input("Entrez la taille de la grille (entre 5 et 45) : "))
+            if 5 <= size <= 45:
+                return size
+            else:
+                print("Veuillez entrer un nombre entier entre 5 et 45")
+        except ValueError:
             print("Veuillez entrer un nombre entier")
-    
